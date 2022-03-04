@@ -1,7 +1,9 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"strings"
 
 	"github.com/gocolly/colly"
@@ -43,5 +45,9 @@ func main() {
 		valRanking = append(valRanking, team)
 	}
 
-	fmt.Print(valRanking)
+	valTeamJSON, _ := json.Marshal(valRanking)
+	err := ioutil.WriteFile("output.json", valTeamJSON, 0644)
+	if err != nil {
+		panic(err)
+	}
 }
